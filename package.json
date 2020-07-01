@@ -1,0 +1,33 @@
+{
+  "name": "yahtzee-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/server.js",
+  "scripts": {
+    "start-dev": "nodemon --config \"nodemon.json\"",
+    "start": "node dist/server.js",
+    "compile": "tsc",
+    "deploy": "tsc && gcloud app deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ralake/yahtzee-ts.git"
+  },
+  "author": "ralake",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ralake/yahtzee-ts/issues"
+  },
+  "homepage": "https://github.com/ralake/yahtzee-ts#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.6",
+    "@types/node": "^14.0.14",
+    "nodemon": "^2.0.4",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "tslib": "^2.0.0"
+  }
+}
