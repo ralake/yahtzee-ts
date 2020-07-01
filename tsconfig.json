@@ -4,7 +4,7 @@
     "esModuleInterop": true,
     "strict": true,
     "baseUrl": "./",
-    "outDir": "dist",
+    "outDir": "public/dist",
     "removeComments": true,
     "experimentalDecorators": true,
     "target": "es6",
@@ -22,6 +22,6 @@
     "./src/**/*.ts"
   ],
   "exclude": [
-    "./src/public/"
+    "./public/"
   ]
 }
