@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 
-import Header from './Header'
-import PageWrapper from './PageWrapper'
+import Header from '../components/Header'
+import PageWrapper from '../components/PageWrapper'
 
 export default function Home () {
   return (

@@ -5,8 +5,8 @@ import {
   Route
 } from 'react-router-dom'
 
-import Home from './Home'
-import Game from './Game'
+import Home from './views/Home'
+import Game from './views/Game'
 
 export default function Yahtzee () {
   return (

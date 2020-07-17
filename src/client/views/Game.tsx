@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react'
 import { useParams } from 'react-router-dom'
 
-import Header from './Header'
-import PageWrapper from './PageWrapper'
+import Header from '../components/Header'
+import PageWrapper from '../components/PageWrapper'
 
-import type RouteParams from './RouteParams'
+import type RouteParams from '../RouteParams'
 
 export default function Game () {
   const params: RouteParams = useParams()
