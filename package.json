@@ -7,7 +7,9 @@
     "start-dev": "nodemon --config \"nodemon.json\"",
     "start": "NODE_ENV=production node public/dist/server/server.js",
     "compile": "tsc",
+    "compile-watch": "tsc --watch",
     "build": "webpack -p",
+    "build-watch": "webpack -p --colors --watch",
     "deploy": "npm run compile && npm run build && gcloud app deploy"
   },
   "repository": {
@@ -25,6 +27,8 @@
     "@types/node": "^14.0.14",
     "@types/react": "^16.9.41",
     "@types/react-dom": "^16.9.8",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/shortid": "0.0.29",
     "nodemon": "^2.0.4",
     "source-map-loader": "^1.0.1",
     "ts-loader": "^7.0.5",
@@ -34,9 +38,12 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
     "express": "^4.17.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
+    "shortid": "^2.2.15",
     "tslib": "^2.0.0"
   }
 }
