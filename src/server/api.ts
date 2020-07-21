@@ -1,6 +1,16 @@
-import express from 'express'
 import shortid from 'shortid'
 
-export function createGame (req: express.Request, res: express.Response<any>) {
-  res.json({ gameId: shortid.generate() })
+const games = new Map()
+
+export async function createGame () {
+  const gameId = shortid.generate()
+  const game = { gameId }
+
+  games.set(gameId, game)
+
+  return game
+}
+
+export async function getGame (gameId: string) {
+  return games.get(gameId)
 }
