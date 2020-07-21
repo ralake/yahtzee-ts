@@ -1,11 +1,24 @@
+const webpack = require('webpack')
+
+const env = process.env.NODE_ENV
+
+const DOMAINS = {
+  development: 'http://localhost:2001',
+  production: 'https://yahtzee-282014.ew.r.appspot.com'
+}
+
 module.exports = {
-  mode: 'production',
-  // Enable sourcemaps for debugging webpack's output.
+  mode: env,
   entry: `${__dirname}/public/dist/client/index.js`,
   output: {
     path: `${__dirname}/public/dist`,
     filename: 'bundle.js'
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      DOMAIN: JSON.stringify(DOMAINS[env])
+    })
+  ],
   devtool: 'source-map',
   resolve: {
     extensions: ['.ts', '.tsx', '.js']

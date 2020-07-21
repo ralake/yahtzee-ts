@@ -1,19 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useParams, Redirect } from 'react-router-dom'
-import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, Button, TextField } from '@material-ui/core'
 
-import useRequest, { Method } from '../hooks/useRequest'
-import type RouteParams from '../RouteParams'
+import useSocket from '../hooks/useSocket'
+import { Game, Events, NullableString, RouteParams } from '../../types'
 
 export default function Header () {
   const params: RouteParams = useParams()
-  const [gameId, setGameId] = useState(null)
-  const createGameRequest = useRequest({
-    url: '/api/games',
-    method: Method.POST,
-    lazy: true,
-    onSuccess: (data) => setGameId(data.gameId)
-  })
+  const [playerName, setPlayerName] = useState('')
+  const [gameId, setGameId] = useState<NullableString>(null)
+  const socket = useSocket()
+
+  useEffect(() => {
+    socket.on(Events.LoadGame, (game: Game) => setGameId(game.gameId))
+  }, [])
+
+  function handleAddPlayerClick () {
+    socket.emit(Events.AddPlayer, playerName, params.gameId)
+    setPlayerName('')
+  }
+
+  function handlePlayerNameChange (e: React.ChangeEvent<HTMLInputElement>) {
+    setPlayerName(e.target.value)
+  }
 
   if (gameId) {
     return <Redirect to={`/games/${gameId}`} />
@@ -25,16 +34,30 @@ export default function Header () {
         <Typography variant='h6'>
           Yahtzee
         </Typography>
-        {params.gameId
-          ? <Link to='/'>Home</Link>
-          : <Button
-            disabled={createGameRequest.loading}
+        {!params.gameId && (
+          <Button
             variant='outlined'
-            onClick={() => createGameRequest.makeRequest()}
+            onClick={() => {
+              socket.emit(Events.CreateGame)
+            }}
           >
             New game
           </Button>
-        }
+        )}
+        {params.gameId && (
+          <div>
+            <TextField
+              value={playerName || ''}
+              onChange={handlePlayerNameChange}
+            />
+            <Button
+              disabled={!playerName}
+              onClick={handleAddPlayerClick}
+            >
+              Add player
+            </Button>
+          </div>
+        )}
       </Toolbar>
     </AppBar>
   )

@@ -4,12 +4,12 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
-    "start-dev": "nodemon --config \"nodemon.json\"",
+    "start-dev": "NODE_ENV=development nodemon --config \"nodemon.json\"",
     "start": "NODE_ENV=production node public/dist/server/server.js",
-    "compile": "tsc",
-    "compile-watch": "tsc --watch",
-    "build": "webpack -p",
-    "build-watch": "webpack -p --colors --watch",
+    "compile": "NODE_ENV=production tsc",
+    "compile-watch": "NODE_ENV=development tsc --watch",
+    "build": "NODE_ENV=production webpack -p",
+    "build-watch": "NODE_ENV=development webpack -p --colors --watch",
     "deploy": "npm run compile && npm run build && gcloud app deploy"
   },
   "repository": {
@@ -32,6 +32,7 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.5",
     "@types/shortid": "0.0.29",
+    "@types/socket.io-client": "^1.4.33",
     "nodemon": "^2.0.4",
     "source-map-loader": "^1.0.1",
     "ts-loader": "^7.0.5",
@@ -42,6 +43,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
+    "@types/socket.io": "^2.1.9",
     "axios": "^0.19.2",
     "express": "^4.17.1",
     "express-promise-router": "^4.0.1",
@@ -50,6 +52,8 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "shortid": "^2.2.15",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0",
     "tslib": "^2.0.0"
   }
 }

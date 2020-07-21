@@ -1,6 +1,5 @@
-import app from './app'
+import { port, http } from './app'
 
-const port = app.get('port')
-const server = app.listen(port, () => console.log(`listening on port: ${port}`))
+const server = http.listen(port, () => console.log(`listening on port: ${port}`))
 
 export default server
