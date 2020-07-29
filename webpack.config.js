@@ -9,7 +9,7 @@ const DOMAINS = {
 
 module.exports = {
   mode: env,
-  entry: `${__dirname}/public/dist/client/index.js`,
+  entry: `${__dirname}/src/client/Index.tsx`,
   output: {
     path: `${__dirname}/public/dist`,
     filename: 'bundle.js'
