@@ -44,7 +44,6 @@ export default function Game (props: GameProps) {
   return (
     <PageWrapper>
       <Header />
-      {!game && 'Loading...'}
       {!!game && (
         <div>
           <TextField
