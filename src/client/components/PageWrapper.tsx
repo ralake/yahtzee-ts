@@ -1,6 +1,6 @@
 import React from 'react'
 
-interface PageWrapperProps {
+type PageWrapperProps = {
   children: React.ReactNode
 }
 

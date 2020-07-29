@@ -18,7 +18,7 @@ const router = Router()
 app.use(router)
 app.use(express.static('public'))
 
-app.get(['/', '/*'], (req, res) => {
+app.get(['/', '/games/:gamedId'], (req, res) => {
   res.sendFile(path.join(__dirname, '../../public', 'index.html'))
 })
 
@@ -31,21 +31,25 @@ io.on('connection', socket => {
 
   socket.on(Events.CreateGame, () => {
     const game = api.createGame()
+    console.log(`A user created game ${game.gameId}`)
     socket.emit(Events.LoadGame, game)
   })
 
   socket.on(Events.JoinGame, ({ gameId }) => {
     const game = api.getGame(gameId)
     socket.join(gameId)
+    console.log(`A user joined game ${gameId}`)
     io.to(gameId).emit(Events.LoadGame, game)
   })
 
   socket.on(Events.LeaveGame, ({ gameId }) => {
     socket.leave(gameId)
+    console.log(`A user left game ${gameId}`)
   })
 
   socket.on(Events.AddPlayer, (playerName: Player["name"], gameId: string) => {
     const game = api.addPlayerToGame(playerName, gameId)
+    console.log(`${playerName} was added to game ${gameId}`)
     io.to(gameId).emit(Events.LoadGame, game)
   })
 })
