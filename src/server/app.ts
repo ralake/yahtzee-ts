@@ -12,16 +12,16 @@ export const http = require('http').createServer(app)
 export const port = process.env.PORT || 2001
 
 const io = createSocket(http)
+const html = `${process.env.NODE_ENV}-index.html`
 
 app.use(express.static('public'))
 
-// app.get('/games/:gameId', (req, res) => {
-//   console.log(path.join(__dirname, '../../public', 'index.html'))
-//   res.sendFile(path.join(__dirname, '../../public', 'index.html'))
-// })
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public', html))
+})
 
 app.get('/games/:gameId', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../public', 'index.html'))
+  res.sendFile(path.join(__dirname, '../../public', html))
 })
 
 io.on('connection', socket => {
