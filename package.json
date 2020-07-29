@@ -5,7 +5,7 @@
   "main": "dist/server.js",
   "scripts": {
     "start-dev": "NODE_ENV=development nodemon --config \"nodemon.json\"",
-    "start": "NODE_ENV=production node public/dist/server/server.js",
+    "start": "NODE_ENV=production node dist/server/server.js",
     "compile": "NODE_ENV=production tsc",
     "build": "NODE_ENV=production webpack -p",
     "build-watch": "NODE_ENV=development webpack -p --colors --watch",

@@ -17,11 +17,11 @@ const html = `${process.env.NODE_ENV}-index.html`
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../', html))
+  res.sendFile(path.join(__dirname, '../../public', html))
 })
 
 app.get('/games/:gameId', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../', html))
+  res.sendFile(path.join(__dirname, '../../public', html))
 })
 
 io.on('connection', socket => {
