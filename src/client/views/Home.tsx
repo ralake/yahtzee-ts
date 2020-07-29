@@ -8,7 +8,7 @@ import PageWrapper from '../components/PageWrapper'
 import { Events, Game, NullableString } from '../../types'
 
 type HomeProps = {
-  socket: any // figure this out
+  socket: SocketIOClient.Socket
 }
 
 export default function Home (props: HomeProps) {

@@ -5,10 +5,12 @@ import { AppBar, Toolbar, Typography, Button, TextField } from '@material-ui/cor
 import Header from '../components/Header'
 import PageWrapper from '../components/PageWrapper'
 
-import { Game, Events, RouteParams, NullableGame } from '../../types'
+import { Game, Events, NullableGame } from '../../types'
+
+type RouteParams = { gameId: Game["gameId"] }
 
 type GameProps = {
-  socket: any // figure this out
+  socket: SocketIOClient.Socket
 }
 
 export default function Game (props: GameProps) {
@@ -20,13 +22,13 @@ export default function Game (props: GameProps) {
   const { gameId } = params
 
   useEffect(() => {
-    socket.emit(Events.JoinGame, { gameId })
+    socket.emit(Events.JoinGame, gameId)
     socket.on(Events.LoadGame, (game: Game) => {
       !game ? setGameNotExists(true) : setGame(game)
     })
 
     return () => {
-      socket.emit(Events.LeaveGame, { gameId })
+      socket.emit(Events.LeaveGame, gameId)
     }
   }, [])
 

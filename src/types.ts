@@ -17,5 +17,3 @@ export enum Events {
 
 export type NullableString = string | null
 export type NullableGame = Game | null
-
-export type RouteParams = { gameId: string }

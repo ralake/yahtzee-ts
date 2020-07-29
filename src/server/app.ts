@@ -4,7 +4,7 @@ import express from 'express'
 import createSocket from 'socket.io'
 
 import * as api from './api'
-import { Events, Player } from '../types'
+import { Events, Player, Game } from '../types'
 
 const app = express()
 
@@ -33,19 +33,19 @@ io.on('connection', socket => {
     socket.emit(Events.LoadGame, game)
   })
 
-  socket.on(Events.JoinGame, ({ gameId }) => {
+  socket.on(Events.JoinGame, (gameId: Game["gameId"]) => {
     const game = api.getGame(gameId)
     socket.join(gameId)
     console.log(`A user joined game ${gameId}`)
     io.to(gameId).emit(Events.LoadGame, game)
   })
 
-  socket.on(Events.LeaveGame, ({ gameId }) => {
+  socket.on(Events.LeaveGame, (gameId: Game["gameId"]) => {
     socket.leave(gameId)
     console.log(`A user left game ${gameId}`)
   })
 
-  socket.on(Events.AddPlayer, (playerName: Player["name"], gameId: string) => {
+  socket.on(Events.AddPlayer, (playerName: Player["name"], gameId: Game["gameId"]) => {
     const game = api.addPlayerToGame(playerName, gameId)
     console.log(`${playerName} was added to game ${gameId}`)
     io.to(gameId).emit(Events.LoadGame, game)
