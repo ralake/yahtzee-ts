@@ -1,7 +1,6 @@
 
 import path from 'path'
 import express from 'express'
-import Router from 'express-promise-router'
 import createSocket from 'socket.io'
 
 import * as api from './api'
@@ -13,9 +12,7 @@ export const http = require('http').createServer(app)
 export const port = process.env.PORT || 2001
 
 const io = createSocket(http)
-const router = Router()
 
-app.use(router)
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
