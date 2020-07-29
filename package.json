@@ -7,7 +7,6 @@
     "start-dev": "NODE_ENV=development nodemon --config \"nodemon.json\"",
     "start": "NODE_ENV=production node public/dist/server/server.js",
     "compile": "NODE_ENV=production tsc",
-    "compile-watch": "NODE_ENV=development tsc --watch",
     "build": "NODE_ENV=production webpack -p",
     "build-watch": "NODE_ENV=development webpack -p --colors --watch",
     "deploy": "npm run compile && npm run build && gcloud app deploy"
